@@ -1,0 +1,35 @@
+{
+	"builders": [{
+		"type": "virtualbox-iso",
+		"guest_os_type": "Debian_64",
+		"iso_url": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.8.0-amd64-netinst.iso",
+		"iso_checksum": "73bd56fb4548efa384bf32fd25808b99198f81c23cf19ab9e6507d898cd58dce",
+		"iso_checksum_type": "sha256",
+		"output_directory": "output",
+		"vm_name": "debian-9.8.0",
+		"disk_size": 15000,
+		"headless": "false",
+		"http_directory": "http",
+		"boot_wait": "5s",
+		"boot_command": [
+            "<esc><wait>",
+            "/install.amd/vmlinuz",
+            " initrd=/install.amd/initrd.gz",
+			" auto=true",
+            " priority=critical", 
+			" url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg",
+            " ---",
+            "<enter>"
+		],
+		"ssh_timeout": "60m",
+		"ssh_username": "debian",
+		"ssh_password": "debian",
+		"shutdown_command": "sudo systemctl poweroff",
+		"vboxmanage": [
+			["modifyvm", "{{.Name}}", "--memory", 2048],
+			["modifyvm", "{{.Name}}", "--cpus", 2]
+		]
+	}],
+	"provisioners": [
+	]
+}
