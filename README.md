@@ -4,7 +4,7 @@ The project is examples of unattended Linux distrobution installations using Pac
 
 ### Requirements
 
-Packer.io
-VirtualBox
+* Packer.io
+* VirtualBox
 
 
