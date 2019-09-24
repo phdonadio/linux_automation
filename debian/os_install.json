@@ -1,9 +1,10 @@
 {
 	"builders": [{
 		"type": "virtualbox-iso",
+        "communicator": "ssh",
 		"guest_os_type": "Debian_64",
-		"iso_url": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.8.0-amd64-netinst.iso",
-		"iso_checksum": "73bd56fb4548efa384bf32fd25808b99198f81c23cf19ab9e6507d898cd58dce",
+		"iso_url": "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.1.0-amd64-netinst.iso",
+		"iso_checksum": "7915fdb77a0c2623b4481fc5f0a8052330defe1cde1e0834ff233818dc6f301e",
 		"iso_checksum_type": "sha256",
 		"output_directory": "output",
 		"vm_name": "debian-9.8.0",
@@ -24,7 +25,8 @@
 		"ssh_timeout": "60m",
 		"ssh_username": "debian",
 		"ssh_password": "debian",
-		"shutdown_command": "sudo systemctl poweroff",
+        "ssh_pty": true,
+		"shutdown_command": "echo debian | sudo -S systemctl poweroff",
 		"vboxmanage": [
 			["modifyvm", "{{.Name}}", "--memory", 2048],
 			["modifyvm", "{{.Name}}", "--cpus", 2]
