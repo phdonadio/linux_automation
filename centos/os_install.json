@@ -1,0 +1,28 @@
+{
+	"builders": [{
+		"type": "virtualbox-iso",
+        "communicator": "ssh",
+		"guest_os_type": "RedHat_64",
+		"iso_url": "http://mirrors.mit.edu/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1908.iso",
+		"iso_checksum": "9a2c47d97b9975452f7d582264e9fc16d108ed8252ac6816239a3b58cef5c53d",
+		"iso_checksum_type": "sha256",
+		"output_directory": "output",
+		"vm_name": "centos-7.7.1908",
+		"disk_size": 15000,
+		"headless": "false",
+		"http_directory": "http",
+		"boot_wait": "5s",
+		"boot_command": [ "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>" ],
+		"ssh_timeout": "60m",
+		"ssh_username": "root",
+		"ssh_password": "centos",
+        "ssh_pty": true,
+		"shutdown_command": "echo centos | sudo -S systemctl poweroff",
+		"vboxmanage": [
+			["modifyvm", "{{.Name}}", "--memory", 2048],
+			["modifyvm", "{{.Name}}", "--cpus", 2]
+		]
+	}],
+	"provisioners": [
+	]
+}
